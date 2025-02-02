@@ -3,11 +3,11 @@
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](/api/placeholder/800/400)
+![Home Page](/images/home.png)
 *Home page featuring a modern dashboard with category cards and navigation sidebar*
 
 ### Book Catalog
-![Catalog Page](/api/placeholder/800/400)
+![Catalog Page](/images/catalog.png)
 *Book catalog displaying a responsive grid of book cards with titles and descriptions*
 
 ## 🎯 Overview
