@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   // ... other configuration settings
   entry: './src/index.js', // Ensure this file exists!
+  mode: process.env.NODE_ENV || 'development', // Ensure Webpack uses the correct mode
   output: {
     publicPath: process.env.NODE_ENV === 'production' 
       ? 'http://parent-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com'
