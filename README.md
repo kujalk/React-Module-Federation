@@ -4,11 +4,11 @@
 
 ### Home Page
 ![Home Page](/images/home_page.png)
-*Home page featuring a modern dashboard with category cards and navigation sidebar*
+*Home page featuring category cards and navigation sidebar serving from parent app*
 
 ### Book Catalog
 ![Catalog Page](/images/catalog.png)
-*Book catalog displaying a responsive grid of book cards with titles and descriptions*
+*Book catalog displaying a responsive grid of book cards with titles and descriptions serving from child app*
 
 ## 🎯 Overview
 
