@@ -1,0 +1,44 @@
+name: Build and Deploy MicroFrontend
+
+on:
+  push:
+    branches: [ parent-app, catalog-app ]  # Trigger on pushes
+
+env:
+  AWS_REGION: ap-southeast-1
+  PARENT_BUCKET_NAME: parent-app-react-frontend 
+  CATALOG_BUCKET_NAME: catalog-app-react-frontend 
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+          
+      - name: Build and Deploy Catalog App
+        if: github.ref == 'refs/heads/catalog-app'
+        run: |
+          npm ci
+          npm run build
+          aws s3 sync build/ s3://${{ env.CATALOG_BUCKET_NAME }}/catalog/ --delete
+          
+      - name: Build and Deploy Parent App
+        if: github.ref == 'refs/heads/parent-app'
+        run: |
+          npm ci
+          npm run build
+          aws s3 sync build/ s3://${{ env.PARENT_BUCKET_NAME }}/parent/ --delete
+          

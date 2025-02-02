@@ -7,9 +7,10 @@ module.exports = {
   entry: './src/index.js', // your entry file
   mode: 'development', // or 'production'
   output: {
-    publicPath: 'auto',
+    publicPath: process.env.NODE_ENV === 'production' 
+      ? 'http://catalog-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com'
+      : 'auto',
     path: path.resolve(__dirname, 'build'),
-    // Ensure filename patterns include remoteEntry.js if needed
   },
   devServer: {
     port: 3001,
