@@ -1,5 +1,6 @@
 // In parent-app/webpack.config.js
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -46,12 +47,15 @@ module.exports = {
     ],
   },
   plugins: [
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    }),
     new ModuleFederationPlugin({
       name: 'parentApp',
       remotes: {
         catalogApp: process.env.NODE_ENV === 'production'
           ? 'catalogApp@http://catalog-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com/remoteEntry.js'
-          : 'catalogApp@http://catalog-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com/remoteEntry.js',
+          : 'catalogApp@http://localhost:3001/remoteEntry.js',
       },
       shared: {
         react: { singleton: true, eager: true, requiredVersion: '^17.0.0' },
