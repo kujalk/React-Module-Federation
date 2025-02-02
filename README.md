@@ -3,7 +3,7 @@
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](/images/home.png)
+![Home Page](/images/home_page.png)
 *Home page featuring a modern dashboard with category cards and navigation sidebar*
 
 ### Book Catalog
@@ -118,7 +118,7 @@ Required secrets in GitHub:
 ### Visual Development Guide
 
 #### Deployment Flow
-![Deployment Process](/api/placeholder/800/400)
+![Deployment Process](/images/deployment.png)
 *GitHub Actions deployment workflow visualization*
 
 ## 📚 Available Scripts
