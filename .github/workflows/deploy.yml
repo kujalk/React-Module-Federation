@@ -33,12 +33,12 @@ jobs:
         run: |
           npm ci
           npm run build
-          aws s3 sync build/ s3://${{ env.CATALOG_BUCKET_NAME }}/catalog/ --delete
+          aws s3 sync build/ s3://${{ env.CATALOG_BUCKET_NAME }}/ --delete
           
       - name: Build and Deploy Parent App
         if: github.ref == 'refs/heads/parent-app'
         run: |
           npm ci
           npm run build
-          aws s3 sync build/ s3://${{ env.PARENT_BUCKET_NAME }}/parent/ --delete
+          aws s3 sync build/ s3://${{ env.PARENT_BUCKET_NAME }}/ --delete
           
