@@ -6,7 +6,10 @@ module.exports = {
   // ... other configuration settings
   entry: './src/index.js', // Ensure this file exists!
   output: {
-    publicPath: 'auto',
+    publicPath: process.env.NODE_ENV === 'production' 
+      ? 'http://parent-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com'
+      : 'auto',
+    path: path.resolve(__dirname, 'build'),
   },
   module: {
     rules: [
@@ -44,7 +47,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'parentApp',
       remotes: {
-        catalogApp: 'catalogApp@http://localhost:3001/remoteEntry.js',
+        catalogApp: process.env.NODE_ENV === 'production'
+          ? 'catalogApp@http://catalog-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com/remoteEntry.js'
+          : 'catalogApp@http://localhost:3001/remoteEntry.js',
       },
       shared: {
         react: { singleton: true, eager: true, requiredVersion: '^17.0.0' },
