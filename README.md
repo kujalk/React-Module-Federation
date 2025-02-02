@@ -1,5 +1,15 @@
 # Library Micro-Frontend Application
 
+## 📸 Screenshots
+
+### Home Page
+![Home Page](/api/placeholder/800/400)
+*Home page featuring a modern dashboard with category cards and navigation sidebar*
+
+### Book Catalog
+![Catalog Page](/api/placeholder/800/400)
+*Book catalog displaying a responsive grid of book cards with titles and descriptions*
+
 ## 🎯 Overview
 
 This project demonstrates a micro-frontend architecture using Webpack Module Federation. It consists of two applications:
@@ -104,6 +114,12 @@ Required secrets in GitHub:
    - Merge to respective branch
    - GitHub Actions automatically builds and deploys
    - Changes are live within minutes
+
+### Visual Development Guide
+
+#### Deployment Flow
+![Deployment Process](/api/placeholder/800/400)
+*GitHub Actions deployment workflow visualization*
 
 ## 📚 Available Scripts
 
