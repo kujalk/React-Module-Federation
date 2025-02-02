@@ -7,11 +7,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   // ... other configuration settings
   entry: './src/index.js', // Ensure this file exists!
-  mode: process.env.NODE_ENV || 'development', // Ensure Webpack uses the correct mode
+  mode: process.env.NODE_ENV || 'production', // Ensure Webpack uses the correct mode
   output: {
-    publicPath: process.env.NODE_ENV === 'production' 
-      ? 'http://parent-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com'
-      : 'auto',
+    publicPath: process.env.NODE_ENV === 'development' 
+      ? 'auto'
+      : 'http://parent-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com',
     path: path.resolve(__dirname, 'build'),
   },
   module: {
@@ -53,9 +53,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'parentApp',
       remotes: {
-        catalogApp: process.env.NODE_ENV === 'production'
-          ? 'catalogApp@http://catalog-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com/remoteEntry.js'
-          : 'catalogApp@http://localhost:3001/remoteEntry.js',
+        catalogApp: process.env.NODE_ENV === 'development'
+          ? 'catalogApp@http://localhost:3001/remoteEntry.js'
+          : 'catalogApp@http://catalog-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com/remoteEntry.js',
       },
       shared: {
         react: { singleton: true, eager: true, requiredVersion: '^17.0.0' },
