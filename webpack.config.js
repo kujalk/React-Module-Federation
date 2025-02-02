@@ -1,6 +1,6 @@
 // In parent-app/webpack.config.js
 const path = require('path');
-const { DefinePlugin } = require('webpack');
+const webpack = require('webpack');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -47,8 +47,8 @@ module.exports = {
     ],
   },
   plugins: [
-    new DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }),
     new ModuleFederationPlugin({
       name: 'parentApp',
