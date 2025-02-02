@@ -1,70 +1,158 @@
-# Getting Started with Create React App
+# Library Micro-Frontend Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🎯 Overview
 
-## Available Scripts
+This project demonstrates a micro-frontend architecture using Webpack Module Federation. It consists of two applications:
+- A parent application (main shell)
+- A catalog micro-frontend (remote module)
 
-In the project directory, you can run:
+The applications are built using React and Material-UI, featuring a modern, responsive design with a collapsible sidebar navigation.
 
-### `npm start`
+## 🏗 Architecture
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Module Federation
+This project leverages Webpack 5's Module Federation to enable micro-frontend architecture. The benefits include:
+- Independent deployment of micro-frontends
+- Runtime sharing of components and dependencies
+- Reduced bundle sizes through shared libraries
+- Improved team autonomy and scalability
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Components
+- **Parent App**: Main shell application containing the layout and navigation
+- **Catalog App**: Remote micro-frontend exposing a book catalog component
+- **Shared Dependencies**: React, React-DOM, and Material-UI are shared between applications
 
-### `npm test`
+## 🚀 Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
+- Node.js >= 16
+- npm or yarn
+- AWS CLI (for deployment)
 
-### `npm run build`
+### Local Development
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the repository**
+```bash
+git clone <repository-url>
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Catalog App Setup**
+```bash
+cd catalog-app
+npm install
+npm start
+```
+The catalog app will run on port 3001.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Parent App Setup**
+```bash
+cd parent-app
+npm install
+npm start
+```
+The parent app will run on the default port (3000).
 
-### `npm run eject`
+## 🔧 Configuration
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Webpack Configuration
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Both applications use custom webpack configurations to enable Module Federation:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Catalog App (Remote)
+- Exposes the Catalog component
+- Configures shared dependencies
+- Sets up development and production endpoints
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Parent App (Host)
+- Configures remote module loading
+- Sets up shared dependency management
+- Handles development and production URLs
 
-## Learn More
+## 📦 Deployment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The application is deployed to AWS S3 using GitHub Actions.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### AWS S3 Setup
 
-### Code Splitting
+1. Create two S3 buckets:
+   - `parent-app-react-frontend`
+   - `catalog-app-react-frontend`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Configure buckets for static website hosting:
+   - Enable static website hosting
+   - Set index.html as the index document
+   - Configure proper CORS settings
 
-### Analyzing the Bundle Size
+### GitHub Actions Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The workflow automatically deploys to S3 when pushing to specific branches:
+- `parent-app` branch deploys to the parent app bucket
+- `catalog-app` branch deploys to the catalog app bucket
 
-### Making a Progressive Web App
+Required secrets in GitHub:
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🔄 Development Workflow
 
-### Advanced Configuration
+1. Feature Development
+   - Create feature branch from `parent-app` or `catalog-app`
+   - Develop and test locally
+   - Create pull request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+2. Deployment
+   - Merge to respective branch
+   - GitHub Actions automatically builds and deploys
+   - Changes are live within minutes
 
-### Deployment
+## 📚 Available Scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Catalog App
+```bash
+npm start    # Start development server
+npm build    # Build for production
+npm test     # Run tests
+```
 
-### `npm run build` fails to minify
+### Parent App
+```bash
+npm start    # Start development server
+npm build    # Build for production
+npm test     # Run tests
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🎨 Features
+
+- Responsive Material-UI design
+- Collapsible sidebar navigation
+- Dynamic component loading
+- Shared dependency management
+- Independent deployment capability
+- AWS S3 static hosting
+
+## 🔒 Environment Variables
+
+Development:
+```env
+NODE_ENV=development
+```
+
+Production:
+```env
+NODE_ENV=production
+```
+
+## 📝 Notes
+
+- Ensure proper CORS configuration in S3 buckets
+- Keep shared dependency versions aligned
+- Test thoroughly in both development and production modes
+- Monitor bundle sizes and sharing effectiveness
+
+## 🤝 Contributor
+
+K.Janarthanan
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
