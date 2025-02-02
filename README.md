@@ -12,7 +12,7 @@
 
 ## 🎯 Overview
 
-This project demonstrates a micro-frontend architecture using Webpack Module Federation. It consists of two applications:
+This project demonstrates a micro-frontend architecture using Webpack Module Federation. It consists of two applications running in separate branches:
 - A parent application (main shell)
 - A catalog micro-frontend (remote module)
 
@@ -48,6 +48,7 @@ git clone <repository-url>
 
 2. **Catalog App Setup**
 ```bash
+git checkout catalog-app
 cd catalog-app
 npm install
 npm start
@@ -56,6 +57,7 @@ The catalog app will run on port 3001.
 
 3. **Parent App Setup**
 ```bash
+git checkout parent-app
 cd parent-app
 npm install
 npm start
