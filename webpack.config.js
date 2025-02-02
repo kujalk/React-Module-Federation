@@ -51,7 +51,7 @@ module.exports = {
       remotes: {
         catalogApp: process.env.NODE_ENV === 'production'
           ? 'catalogApp@http://catalog-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com/remoteEntry.js'
-          : 'catalogApp@http://localhost:3001/remoteEntry.js',
+          : 'catalogApp@http://catalog-app-react-frontend.s3-website-ap-southeast-1.amazonaws.com/remoteEntry.js',
       },
       shared: {
         react: { singleton: true, eager: true, requiredVersion: '^17.0.0' },
