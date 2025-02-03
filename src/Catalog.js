@@ -26,7 +26,12 @@ const catalogItems = [
   {
     id: 5,
     title: 'Book Five',
-    description: 'Forests Secrets',
+    description: 'Forests and Oceans',
+  },
+  {
+    id: 6,
+    title: 'Book Six',
+    description: 'Data Structures and Algorithms',
   },
 ];
 
